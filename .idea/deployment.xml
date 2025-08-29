@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="semogajayastore.my.id" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="semogajayastore.my.id">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tayang.semogajayastore.my.id" local="$PROJECT_DIR$" web="tayang.semogajayastore.my.id" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
