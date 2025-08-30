@@ -8,7 +8,7 @@ interface FooterProps {
 
 const Footer = ({ currentLang }: FooterProps) => {
   return (
-    <footer className="w-full p-8 flex items-center justify-center border-t border-white/10 bg-[#154c79] text-white">
+    <footer className="w-full p-8 flex items-center justify-center border-t border-white/10 bg-slate-800 text-white">
       <div className="text-center text-sm">
         <p>&copy; {new Date().getFullYear()} Tayang Group Indonesia. {translations[currentLang].footerRights}</p>
       </div>

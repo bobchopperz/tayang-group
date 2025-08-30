@@ -61,10 +61,10 @@ const Navbar = ({ currentLang, onLangChange, navTheme }: NavbarProps) => {
                             <Link href="#section1" className={`px-3 py-2 rounded-md text-base font-medium transition-colors ${isLight ? 'text-stone-600 hover:text-stone-900' : 'text-white hover:text-gray-200 [text-shadow:0_1px_3px_rgb(0_0_0_/_0.4)]'}`}>
                                 {translations[currentLang].home}
                             </Link>
-                            <Link href="#section5" className={`px-3 py-2 rounded-md text-base font-medium transition-colors ${isLight ? 'text-stone-600 hover:text-stone-900' : 'text-white hover:text-gray-200 [text-shadow:0_1px_3px_rgb(0_0_0_/_0.4)]'}`}>
+                            <Link href="#section3" className={`px-3 py-2 rounded-md text-base font-medium transition-colors ${isLight ? 'text-stone-600 hover:text-stone-900' : 'text-white hover:text-gray-200 [text-shadow:0_1px_3px_rgb(0_0_0_/_0.4)]'}`}>
                                 {translations[currentLang].about}
                             </Link>
-                            <Link href="#section7" className={`px-3 py-2 rounded-md text-base font-medium transition-colors ${isLight ? 'text-stone-600 hover:text-stone-900' : 'text-white hover:text-gray-200 [text-shadow:0_1px_3px_rgb(0_0_0_/_0.4)]'}`}>
+                            <Link href="#section5" className={`px-3 py-2 rounded-md text-base font-medium transition-colors ${isLight ? 'text-stone-600 hover:text-stone-900' : 'text-white hover:text-gray-200 [text-shadow:0_1px_3px_rgb(0_0_0_/_0.4)]'}`}>
                                 {translations[currentLang].contact}
                             </Link>
                         </div>
@@ -115,10 +115,10 @@ const Navbar = ({ currentLang, onLangChange, navTheme }: NavbarProps) => {
                                     <Link href="#section1" onClick={() => setMobileMenuOpen(false)} className={`block px-4 py-3 text-base transition-colors ${isLight ? 'text-gray-700 hover:bg-gray-100' : 'text-gray-200 hover:bg-white/10'}`} role="menuitem">
                                         {translations[currentLang].home}
                                     </Link>
-                                    <Link href="#section5" onClick={() => setMobileMenuOpen(false)} className={`block px-4 py-3 text-base transition-colors ${isLight ? 'text-gray-700 hover:bg-gray-100' : 'text-gray-200 hover:bg-white/10'}`} role="menuitem">
+                                    <Link href="#section3" onClick={() => setMobileMenuOpen(false)} className={`block px-4 py-3 text-base transition-colors ${isLight ? 'text-gray-700 hover:bg-gray-100' : 'text-gray-200 hover:bg-white/10'}`} role="menuitem">
                                         {translations[currentLang].about}
                                     </Link>
-                                    <Link href="#section7" onClick={() => setMobileMenuOpen(false)} className={`block px-4 py-3 text-base transition-colors ${isLight ? 'text-gray-700 hover:bg-gray-100' : 'text-gray-200 hover:bg-white/10'}`} role="menuitem">
+                                    <Link href="#section5" onClick={() => setMobileMenuOpen(false)} className={`block px-4 py-3 text-base transition-colors ${isLight ? 'text-gray-700 hover:bg-gray-100' : 'text-gray-200 hover:bg-white/10'}`} role="menuitem">
                                         {translations[currentLang].contact}
                                     </Link>
 
