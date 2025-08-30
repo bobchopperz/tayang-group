@@ -1,6 +1,6 @@
 'use client'; // Jadikan Client Component untuk mengelola state
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { translations, type Language } from '@/lib/translations';
@@ -9,52 +9,95 @@ import { translations, type Language } from '@/lib/translations';
 // Untuk metadata dinamis, Anda perlu menggunakan cara lain atau menempatkannya di layout.tsx.
 
 export default function Home() {
-  // State dan fungsi pengubahnya dipindahkan ke sini dari Navbar
+  // === State Management ===
   const [currentLang, setCurrentLang] = useState<Language>('ID');
+  const [navTheme, setNavTheme] = useState<'light' | 'dark'>('dark'); // Default 'dark' untuk navbar transparan di atas
+
+  // === Refs untuk setiap section ===
+  const sections = {
+    section1: useRef<HTMLElement>(null),
+    section2: useRef<HTMLElement>(null),
+    section3: useRef<HTMLElement>(null),
+    section4: useRef<HTMLElement>(null),
+    section5: useRef<HTMLElement>(null),
+    section6: useRef<HTMLElement>(null),
+    section7: useRef<HTMLElement>(null),
+  };
 
   const handleLangChange = (lang: Language) => {
       setCurrentLang(lang);
-      // Logika i18n yang sebenarnya akan dijalankan di sini
       console.log(`Bahasa diubah ke: ${lang}`);
   };
+
+  // === Intersection Observer untuk mengubah tema Navbar ===
+  useEffect(() => {
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const theme = (entry.target as HTMLElement).dataset.theme as 'light' | 'dark';
+          setNavTheme(theme);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, {
+      rootMargin: '-50% 0px -50% 0px', // Memicu saat section berada di tengah layar
+      threshold: 0,
+    });
+
+    Object.values(sections).forEach(sectionRef => {
+      if (sectionRef.current) {
+        observer.observe(sectionRef.current);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, []); // Hanya dijalankan sekali
 
   return (
     <div className="flex flex-col min-h-screen font-sans">
       {/* Kirim state dan fungsi sebagai props ke Navbar */}
-      <Navbar currentLang={currentLang} onLangChange={handleLangChange} />
+      <Navbar currentLang={currentLang} onLangChange={handleLangChange} navTheme={navTheme} />
       {/* Bungkus semua section dengan satu tag <main> */}
       <main>
-        <section id="section1" className="flex min-h-screen flex-col items-center justify-center p-24 bg-white">
+        {/* Section 1: Hitam (Navbar Transparan) */}
+        <section ref={sections.section1} data-theme="dark" id="section1" className="flex min-h-screen flex-col items-center justify-center p-24 bg-black text-white">
           <h1 className="text-5xl font-bold mb-4 text-center text-neutral-700">{translations[currentLang].section1}</h1>
-            <span className="text-black text-center max-w-lg">{translations[currentLang].placeholderText}</span>
+            <span className="text-neutral-300 text-center max-w-lg">{translations[currentLang].placeholderText}</span>
         </section>
 
-        <section id="section2" className="flex min-h-screen flex-col items-center justify-center p-24 bg-gray-50">
+        {/* Section 2: Putih (Navbar Solid) */}
+        <section ref={sections.section2} data-theme="light" id="section2" className="flex min-h-screen flex-col items-center justify-center p-24 bg-white">
             <h1 className="text-5xl font-bold mb-4 text-center text-neutral-700">{translations[currentLang].section2}</h1>
             <span className="text-black text-center max-w-lg">{translations[currentLang].placeholderText}</span>
         </section>
 
-        <section id="section3" className="flex min-h-screen flex-col items-center justify-center p-24 bg-white">
-            <h2 className="text-5xl font-bold mb-4 text-center text-neutral-700">{translations[currentLang].section3}</h2>
-            <span className="text-black text-center max-w-lg">{translations[currentLang].placeholderText}</span>
+        {/* Section 3: Hitam (Navbar Transparan) */}
+        <section ref={sections.section3} data-theme="dark" id="section3" className="flex min-h-screen flex-col items-center justify-center p-24 bg-black text-white">
+            <h2 className="text-5xl font-bold mb-4 text-center text-neutral-200">{translations[currentLang].section3}</h2>
+            <span className="text-neutral-300 text-center max-w-lg">{translations[currentLang].placeholderText}</span>
         </section>
 
-        <section id="section4" className="flex min-h-screen flex-col items-center justify-center p-24 bg-gray-50">
+        {/* Section 4: Putih (Navbar Solid) */}
+        <section ref={sections.section4} data-theme="light" id="section4" className="flex min-h-screen flex-col items-center justify-center p-24 bg-white">
             <h2 className="text-5xl font-bold mb-4 text-center text-neutral-700">{translations[currentLang].section4}</h2>
             <span className="text-black text-center max-w-lg">{translations[currentLang].placeholderText}</span>
         </section>
 
-        <section id="section5" className="flex min-h-screen flex-col items-center justify-center p-24 bg-white">
-            <h2 className="text-5xl font-bold mb-4 text-center text-neutral-700">{translations[currentLang].section5}</h2>
-            <span className="text-black text-center max-w-lg">{translations[currentLang].placeholderText}</span>
+        {/* Section 5: Hitam (Navbar Transparan) */}
+        <section ref={sections.section5} data-theme="dark" id="section5" className="flex min-h-screen flex-col items-center justify-center p-24 bg-black text-white">
+            <h2 className="text-5xl font-bold mb-4 text-center text-neutral-200">{translations[currentLang].section5}</h2>
+            <span className="text-neutral-300 text-center max-w-lg">{translations[currentLang].placeholderText}</span>
         </section>
 
-        <section id="section6" className="flex min-h-screen flex-col items-center justify-center p-24 bg-gray-50">
+        {/* Section 6: Putih (Navbar Solid) */}
+        <section ref={sections.section6} data-theme="light" id="section6" className="flex min-h-screen flex-col items-center justify-center p-24 bg-white">
             <h2 className="text-5xl font-bold mb-4 text-center text-neutral-700">{translations[currentLang].section6}</h2>
             <span className="text-black text-center max-w-lg">{translations[currentLang].placeholderText}</span>
         </section>
 
-        <section id="section7" className="flex min-h-screen flex-col items-center justify-center p-24 bg-white">
+        {/* Section 7: Abu-abu (Navbar Solid) */}
+        <section ref={sections.section7} data-theme="light" id="section7" className="flex min-h-screen flex-col items-center justify-center p-24 bg-slate-200">
             <h2 className="text-5xl font-bold mb-4 text-center text-neutral-700">{translations[currentLang].section7}</h2>
             <span className="text-black text-center max-w-lg">{translations[currentLang].placeholderText}</span>
         </section>
